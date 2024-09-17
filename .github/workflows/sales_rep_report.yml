@@ -26,10 +26,13 @@ jobs:
         with:
           python-version: '3.12'  # Specify your Python version
 
-      # Run your Python script
-      - name: Run the script
+      # Run Python script from secret (instead of storing it in repo)
+      - name: Run the script from secret
+        env:
+          PYTHON_SCRIPT: ${{ secrets.PYTHON_SCRIPT }}
         run: |
-          python automatic_report.py
+          echo "$PYTHON_SCRIPT" > script.py
+          python3 script.py
 
       # Configure git
       - name: Set up git
