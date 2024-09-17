@@ -43,8 +43,8 @@ jobs:
       # Add changes to git
       - name: Commit changes
         run: |
-          git add .
-          git commit -m "Automated commit from GitHub Actions"
+          git add *.pdf
+          git commit -m "Automated commit of pdf file"
 
       # Push changes back to the repository
       - name: Push changes
