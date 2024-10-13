@@ -1,53 +1,53 @@
-name: Run Script 12pm utc
+# name: Run Script 12pm utc
 
-on:
-  workflow_dispatch:
-  # push:
-  #   branches:
-  #     # run on every push as well
-  #     - main
+# on:
+#   workflow_dispatch:
+#   # push:
+#   #   branches:
+#   #     # run on every push as well
+#   #     - main
 
-  schedule:
-    # Run at 5 pm daily
-    - cron: "0 5 * * *"
+#   schedule:
+#     # Run at 5 pm daily
+#     - cron: "0 5 * * *"
 
-jobs:
-  run-script:
-    runs-on: ubuntu-latest
+# jobs:
+#   run-script:
+#     runs-on: ubuntu-latest
     
-    steps:
-      # Checkout the repository
-      - name: Checkout repository
-        uses: actions/checkout@v3
+#     steps:
+#       # Checkout the repository
+#       - name: Checkout repository
+#         uses: actions/checkout@v3
 
-      # Set up Python environment
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.12'  # Specify your Python version
+#       # Set up Python environment
+#       - name: Set up Python
+#         uses: actions/setup-python@v4
+#         with:
+#           python-version: '3.12'  # Specify your Python version
 
-      # Run Python script from secret (instead of storing it in repo)
-      - name: Run the script from secret
-        env:
-          PYTHON_SCRIPT: ${{ secrets.PYTHON_SCRIPT }}
-        run: |
-          echo "$PYTHON_SCRIPT" > script.py
-          python3 script.py
+#       # Run Python script from secret (instead of storing it in repo)
+#       - name: Run the script from secret
+#         env:
+#           PYTHON_SCRIPT: ${{ secrets.PYTHON_SCRIPT }}
+#         run: |
+#           echo "$PYTHON_SCRIPT" > script.py
+#           python3 script.py
 
-      # Configure git
-      - name: Set up git
-        run: |
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "actions@github.com"
+#       # Configure git
+#       - name: Set up git
+#         run: |
+#           git config --global user.name "GitHub Actions"
+#           git config --global user.email "actions@github.com"
 
-      # Add changes to git
-      - name: Commit changes
-        run: |
-          git add *.pdf
-          git commit -m "Automated commit of pdf file"
+#       # Add changes to git
+#       - name: Commit changes
+#         run: |
+#           git add *.pdf
+#           git commit -m "Automated commit of pdf file"
 
-      # Push changes back to the repository
-      - name: Push changes
-        run: git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#       # Push changes back to the repository
+#       - name: Push changes
+#         run: git push
+#         env:
+#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
